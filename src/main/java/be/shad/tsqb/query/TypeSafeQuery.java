@@ -240,6 +240,11 @@ public interface TypeSafeQuery extends TypeSafeQueryJoin, WhereRestrictions, Hav
     RestrictionsGroupFactory getGroupedRestrictionsBuilder();
 
     /**
+     * Calls fn.apply(this).
+     */
+    void apply(TypeSafeQueryFunction fn);
+
+    /**
      * Provide methods related to named objects.
      */
     TypeSafeNameds named();

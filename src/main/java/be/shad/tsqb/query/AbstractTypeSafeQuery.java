@@ -392,6 +392,14 @@ public abstract class AbstractTypeSafeQuery implements TypeSafeQuery, TypeSafeQu
      * {@inheritDoc}
      */
     @Override
+    public RestrictionChainable where(RestrictionHolder holder) {
+        return whereRestrictions.and(holder);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public ArithmeticTypeSafeValueFactory getArithmeticsBuilder() {
         return arithmeticsBuilder;
     }
@@ -402,6 +410,14 @@ public abstract class AbstractTypeSafeQuery implements TypeSafeQuery, TypeSafeQu
     @Override
     public RestrictionsGroupFactory getGroupedRestrictionsBuilder() {
         return groupedRestrictionsBuilder;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void apply(TypeSafeQueryFunction fn) {
+        fn.apply(this);
     }
 
     /**

@@ -120,6 +120,11 @@ public class RestrictionsGroupImpl extends RestrictionChainableImpl implements R
         return and(restriction);
     }
 
+    @Override
+    public RestrictionChainable where(RestrictionHolder holder) {
+        return and(holder);
+    }
+
     /**
      * {@inheritDoc}
      */

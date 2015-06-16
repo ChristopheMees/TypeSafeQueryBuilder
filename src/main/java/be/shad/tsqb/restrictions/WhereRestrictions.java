@@ -56,6 +56,11 @@ public interface WhereRestrictions {
     RestrictionChainable where(Restriction restriction);
 
     /**
+     * Delegates to where(restriction) with the result of holder.getRestriction().
+     */
+    RestrictionChainable where(RestrictionHolder holder);
+
+    /**
      * The general restrict by enum method. Anything which represents a number
      * can be used with this method.
      */

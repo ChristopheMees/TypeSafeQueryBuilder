@@ -68,6 +68,11 @@ public class RestrictionsGroupFactoryImpl implements RestrictionsGroupFactory {
     }
 
     @Override
+    public RestrictionChainable where(RestrictionHolder holder) {
+        return createRestrictionsGroup().where(holder);
+    }
+
+    @Override
     public <E extends Enum<E>> OnGoingEnumRestriction<E> whereEnum(TypeSafeValue<E> value) {
         return createRestrictionsGroup().whereEnum(value);
     }
