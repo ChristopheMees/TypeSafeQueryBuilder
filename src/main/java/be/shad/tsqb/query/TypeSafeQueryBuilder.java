@@ -56,7 +56,7 @@ public abstract class TypeSafeQueryBuilder implements TypeSafeQueryFunction {
 
     protected abstract void doto(TypeSafeQuery query);
 
-    public RestrictionsGroup or(RestrictionHolder restriction, RestrictionHolder... restrictions) {
+    public RestrictionsGroup anyOf(RestrictionHolder restriction, RestrictionHolder... restrictions) {
         return rb.or(restriction, restrictions);
     }
 
@@ -64,79 +64,47 @@ public abstract class TypeSafeQueryBuilder implements TypeSafeQueryFunction {
         return rb.createRestrictionsGroup();
     }
 
-    public RestrictionsGroup and(RestrictionHolder restriction, RestrictionHolder... restrictions) {
+    public RestrictionsGroup allOf(RestrictionHolder restriction, RestrictionHolder... restrictions) {
         return rb.and(restriction, restrictions);
     }
 
-    public RestrictionChainable where() {
+    public RestrictionChainable is() {
         return rb.where();
     }
 
-    public RestrictionChainable where(HqlQueryValue hqlQueryvalue) {
+    public RestrictionChainable is(HqlQueryValue hqlQueryvalue) {
         return rb.where(hqlQueryvalue);
     }
 
-    public RestrictionChainable where(RestrictionsGroup group) {
+    public RestrictionChainable is(RestrictionsGroup group) {
         return rb.where(group);
     }
 
-    public RestrictionChainable where(Restriction restriction) {
+    public RestrictionChainable is(Restriction restriction) {
         return rb.where(restriction);
     }
 
-    public RestrictionChainable where(RestrictionHolder holder) {
-        return rb.where(holder);
-    }
-
-    public <E extends Enum<E>> OnGoingEnumRestriction<E> whereEnum(TypeSafeValue<E> value) {
-        return rb.whereEnum(value);
-    }
-
-    public <E extends Enum<E>> OnGoingEnumRestriction<E> where(E value) {
+    public <E extends Enum<E>> OnGoingEnumRestriction<E> is(E value) {
         return rb.where(value);
     }
 
-    public OnGoingBooleanRestriction whereBoolean(TypeSafeValue<Boolean> value) {
-        return rb.whereBoolean(value);
-    }
-
-    public OnGoingBooleanRestriction where(Boolean value) {
+    public OnGoingBooleanRestriction is(Boolean value) {
         return rb.where(value);
     }
 
-    public <N extends Number> OnGoingNumberRestriction whereNumber(TypeSafeValue<N> value) {
-        return rb.whereNumber(value);
-    }
-
-    public OnGoingNumberRestriction where(Number value) {
+    public OnGoingNumberRestriction is(Number value) {
         return rb.where(value);
     }
 
-    public OnGoingDateRestriction whereDate(TypeSafeValue<Date> value) {
-        return rb.whereDate(value);
-    }
-
-    public OnGoingDateRestriction where(Date value) {
+    public OnGoingDateRestriction is(Date value) {
         return rb.where(value);
     }
 
-    public OnGoingTextRestriction whereString(TypeSafeValue<String> value) {
-        return rb.whereString(value);
-    }
-
-    public OnGoingTextRestriction where(String value) {
+    public OnGoingTextRestriction is(String value) {
         return rb.where(value);
     }
 
-    public RestrictionChainable whereExists(TypeSafeSubQuery<?> subquery) {
-        return rb.whereExists(subquery);
-    }
-
-    public RestrictionChainable whereNotExists(TypeSafeSubQuery<?> subquery) {
-        return rb.whereNotExists(subquery);
-    }
-
-    public <T> OnGoingObjectRestriction<T> where(TypeSafeValue<T> value) {
+    public <T> OnGoingObjectRestriction<T> is(TypeSafeValue<T> value) {
         return rb.where(value);
     }
 
@@ -180,12 +148,12 @@ public abstract class TypeSafeQueryBuilder implements TypeSafeQueryFunction {
         return query.from(fromClass);
     }
 
-    public OnGoingNumberRestriction having(Number value) {
-        return query.having(value);
-    }
-
     public <T> T from(Class<T> fromClass, String name) {
         return query.from(fromClass, name);
+    }
+
+    public OnGoingNumberRestriction having(Number value) {
+        return query.having(value);
     }
 
     public OnGoingDateRestriction havingDate(TypeSafeValue<Date> value) {
@@ -196,12 +164,12 @@ public abstract class TypeSafeQueryBuilder implements TypeSafeQueryFunction {
         return query.having(value);
     }
 
-    public OnGoingTextRestriction havingString(TypeSafeValue<String> value) {
-        return query.havingString(value);
-    }
-
     public <S, T extends S> T getAsSubtype(S proxy, Class<T> subtype) throws IllegalArgumentException {
         return query.getAsSubtype(proxy, subtype);
+    }
+
+    public OnGoingTextRestriction havingString(TypeSafeValue<String> value) {
+        return query.havingString(value);
     }
 
     public OnGoingTextRestriction having(String value) {
@@ -351,4 +319,5 @@ public abstract class TypeSafeQueryBuilder implements TypeSafeQueryFunction {
     public void setDefaultRestrictionPredicate(RestrictionPredicate restrictionValuePredicate) {
         query.setDefaultRestrictionPredicate(restrictionValuePredicate);
     }
+
 }

@@ -215,10 +215,10 @@ public class WhereTests extends TypeSafeQueryTest {
         query.apply(new TypeSafeQueryBuilder() {
             @Override protected void doto(TypeSafeQuery query) {
                 Person person = from(Person.class);
-                query.where(person.getId()).eq(1L).and(
-                    or(
-                        where(person.getSex()).eq(Sex.Male),
-                        where(person.getName()).in(names)));
+                query.where(person.getId()).eq(1L);
+                query.and(anyOf(
+                    is(person.getSex()).eq(Sex.Male),
+                    is(person.getName()).in(names)));
             }
         });
         validate(" from Person hobj1 where hobj1.id = :np1 and (hobj1.sex = :np2 or hobj1.name in (:np3))", 1L, Sex.Male, names);

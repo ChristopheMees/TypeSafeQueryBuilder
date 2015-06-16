@@ -361,7 +361,7 @@ public abstract class AbstractTypeSafeQuery implements TypeSafeQuery, TypeSafeQu
      */
     @Override
     public RestrictionChainable or(RestrictionHolder restriction, RestrictionHolder... restrictions) {
-        return this.whereRestrictions.or(restriction, restrictions);
+        return this.whereRestrictions.and(getRestrictions().or(restriction, restrictions));
     }
 
     /**
